@@ -5,4 +5,4 @@ import Drawer from "./Drawer"
 
 storiesOf("Container", module)
   .addDecorator(withKnobs)
-  .add("Drawer", () => <Drawer />)
+  .add("Drawer", () => <Drawer items={[]}>aaa</Drawer>)

@@ -12,12 +12,12 @@ import TextField from "material-ui/TextField"
 import Typography from "material-ui/Typography"
 import Divider from "material-ui/Divider"
 
-const drawerWidth = 240
+const drawerWidth = 300
 
 const styles = theme => ({
   root: {
     width: "100%",
-    height: 430,
+    height: "100%",
     zIndex: 1,
     overflow: "hidden",
   },
@@ -39,7 +39,8 @@ const styles = theme => ({
   },
   drawerPaper: {
     position: "relative",
-    height: "100%",
+    height: "1000px",
+    overflowY: "scroll",
     width: drawerWidth,
   },
   drawerHeader: theme.mixins.toolbar,
@@ -47,14 +48,22 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     width: "100%",
     padding: theme.spacing.unit * 3,
-    height: "calc(100% - 56px)",
+    height: "calc(1000px - 56px)",
     marginTop: 56,
     [theme.breakpoints.up("sm")]: {
-      height: "calc(100% - 64px)",
+      height: "calc(1000px - 64px)",
       marginTop: 64,
     },
+    overflowY: "scroll",
+    display: "flex",
+    justifyContent: "center",
   },
 })
+
+const SubTitle = styled.div`
+  padding: 1rem;
+  color: #c0c0c0;
+`
 
 class PermanentDrawer extends React.Component {
   render() {
@@ -80,20 +89,21 @@ class PermanentDrawer extends React.Component {
           >
             <div className={classes.drawerHeader} />
             <Divider />
+            <SubTitle>TABELS</SubTitle>
+            <Divider />
             <List component="nav">
-              <ListItem button>
-                <ListItemText primary="Trash" />
-              </ListItem>
-              <ListItem button>
-                <ListItemText primary="Trash" />
-              </ListItem>
+              {this.props.items.map(name => (
+                <a href={`#${name}`} key={name}>
+                  <ListItem button>
+                    <ListItemText primary={name} />
+                  </ListItem>
+                </a>
+              ))}
             </List>
             <Divider />
           </Drawer>
           <main className={classes.content}>
-            <Typography>
-              {"You think water moves fast? You should see ice."}
-            </Typography>
+            <Typography>{this.props.children}</Typography>
           </main>
         </div>
       </div>

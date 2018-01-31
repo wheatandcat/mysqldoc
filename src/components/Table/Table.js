@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Typography from "material-ui/Typography"
-import Table, {
+import MuiTable, {
   TableBody,
   TableCell,
   TableHead,
@@ -9,36 +9,53 @@ import Table, {
 } from "material-ui/Table"
 import MuiPaper from "material-ui/Paper"
 
-const Paper = styled(MuiPaper)`
-  padding: 2rem;
+const Root = styled.div`
+  padding: 1rem;
+  min-width: 60rem;
 `
 
-export default () => (
-  <Paper>
-    <Typography type="display1" gutterBottom>
-      contribution_total_follows
+const Paper = styled(MuiPaper)`
+  padding: 0;
+  width: 60rem !important;
+`
+
+const Table = styled(MuiTable)`
+  width: 60rem;
+`
+
+export default ({ name, items }) => (
+  <Root>
+    <Typography type="headline" component="h3" id={name}>
+      #{name}
     </Typography>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>column</TableCell>
-          <TableCell numeric>type</TableCell>
-          <TableCell numeric>null</TableCell>
-          <TableCell numeric>key</TableCell>
-          <TableCell numeric>default</TableCell>
-          <TableCell numeric>extra</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        <TableRow>
-          <TableCell>id</TableCell>
-          <TableCell numeric>int(10)</TableCell>
-          <TableCell numeric>No Null</TableCell>
-          <TableCell numeric>Primary</TableCell>
-          <TableCell numeric>null</TableCell>
-          <TableCell numeric>extra</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </Paper>
+    <br />
+    <Paper>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>COLUMN</TableCell>
+            <TableCell numeric>TYPE</TableCell>
+            <TableCell numeric>NULL</TableCell>
+            <TableCell numeric>KEY</TableCell>
+            <TableCell numeric>DEFAULT</TableCell>
+            <TableCell numeric>EXTRA</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {items.map(
+            ({ column, type, isNull, keyName, defaultValue, extra }) => (
+              <TableRow key={column}>
+                <TableCell>{column}</TableCell>
+                <TableCell numeric>{type}</TableCell>
+                <TableCell numeric>{isNull}</TableCell>
+                <TableCell numeric>{keyName}</TableCell>
+                <TableCell numeric>{defaultValue || "-"}</TableCell>
+                <TableCell numeric>{extra}</TableCell>
+              </TableRow>
+            )
+          )}
+        </TableBody>
+      </Table>
+    </Paper>
+  </Root>
 )
