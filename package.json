@@ -1,7 +1,7 @@
 {
   "name": "mysqldoc",
   "version": "0.5.0",
-  "description": "",
+  "description": "mysql table documents output html",
   "main": "index.js",
   "scripts": {
     "build": "run-s build:*",
