@@ -25,9 +25,8 @@ program
   .option("-h, --host [value]", "host")
   .option("-P, --port [value]", "port")
   .option("-d, --database [value]", "database name")
+  .option("-o, --output [value]", "output path")
   .parse(process.argv)
-
-const outputDir = "mysqldoc"
 
 const start = program => {
   const config = {
@@ -37,6 +36,8 @@ const start = program => {
     port: program.port || "3306",
     database: program.database || "test",
   }
+
+  const outputDir = program.output || "mysqldoc"
 
   mysqldesc(config, async (err, schema) => {
     await rimraf.sync(outputDir)
